@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 "use client";
 
+=======
+>>>>>>> eb141e4b0794902ed9945ed4174e46afd704a8f3
 import React from 'react';
 import { Award, Users, Target, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';

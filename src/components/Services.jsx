@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 "use client";
 
 import React, { useState } from 'react';
+=======
+import React from 'react';
+>>>>>>> eb141e4b0794902ed9945ed4174e46afd704a8f3
 import { Store, Palette, Megaphone, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 

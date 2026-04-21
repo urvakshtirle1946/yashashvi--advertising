@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { HeroButtonExpendable } from "./ui/hero-button-expendable";
+=======
+import React, { useEffect, useRef, useState } from "react";
+import { ArrowRight } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+>>>>>>> eb141e4b0794902ed9945ed4174e46afd704a8f3
 
 const Hero = () => {
   const heroRef = useRef(null);
@@ -112,9 +118,25 @@ const Hero = () => {
             With over a decade of transforming spaces into powerful branding
             experiences...
           </motion.p>
+<<<<<<< HEAD
           <div className="mt-12">
             <HeroButtonExpendable />
           </div>
+=======
+          <motion.a
+            href="#portfolio"
+            className="inline-flex items-center gap-2 bg-[#FF3D00] text-white px-8 py-4 rounded-md hover:bg-[#E63600] transition-all transform hover:translate-x-1"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("portfolio").scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }}
+          >
+            Explore Our Portfolio <ArrowRight size={20} />
+          </motion.a>
+>>>>>>> eb141e4b0794902ed9945ed4174e46afd704a8f3
         </motion.div>
       </motion.div>
     </div>

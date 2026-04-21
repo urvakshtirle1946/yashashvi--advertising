@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -7,4 +8,11 @@
   },
   "include": ["src/**/*", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
+=======
+  "files": [],
+  "references": [
+    { "path": "./jsconfig.app.json" },
+    { "path": "./jsconfig.node.json" }
+  ]
+>>>>>>> eb141e4b0794902ed9945ed4174e46afd704a8f3
 }
