@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 "use client";
 
 import React, { useState } from 'react';
-=======
-import React from 'react';
->>>>>>> eb141e4b0794902ed9945ed4174e46afd704a8f3
 import { Store, Palette, Megaphone, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -27,7 +23,7 @@ const services = [
   {
     icon: Users,
     title: 'Brand Visibility Consultation',
-    description: "Expert guidance to maximize your brand’s impact and reach your target audience effectively."
+    description: "Expert guidance to maximize your brand's impact and reach your target audience effectively."
   }
 ];
 
@@ -78,7 +74,7 @@ const Services = () => {
           viewport={{ once: true, amount: 0.1 }}
         >
           {services.map((service, index) => {
-            const IconComponent = service.icon; // Fix for JSX compatibility
+            const IconComponent = service.icon;
             return (
               <motion.div 
                 key={index} 
