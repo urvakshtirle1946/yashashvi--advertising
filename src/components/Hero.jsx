@@ -82,7 +82,7 @@ const Hero = () => {
 
       {/* Hero Content */}
       <motion.div
-        className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32"
+        className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 sm:py-32"
         style={{ y, opacity }}
       >
         <motion.div
@@ -91,10 +91,10 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <motion.h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+          <motion.h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
             <motion.span className="text-[#FF3D00]">{companyName}</motion.span>
             <br />
-            <span className="inline-flex">
+            <span className="inline-flex flex-wrap">
               Provides{" "}
               <span className="relative ml-2 text-[#FF3D00] inline-flex whitespace-nowrap">
                 {displayProduct}
@@ -108,11 +108,11 @@ const Hero = () => {
               </span>
             </span>
           </motion.h1>
-          <motion.p className="text-xl text-gray-200 mb-12 leading-relaxed">
+          <motion.p className="text-base sm:text-lg md:text-xl text-gray-200 mb-8 sm:mb-12 leading-relaxed max-w-xl">
             With over a decade of transforming spaces into powerful branding
             experiences...
           </motion.p>
-          <div className="mt-12">
+          <div>
             <HeroButtonExpendable />
           </div>
         </motion.div>

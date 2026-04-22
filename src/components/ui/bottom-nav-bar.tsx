@@ -56,8 +56,8 @@ export default function BottomNavBar() {
   };
 
   return (
-    <div className="flex items-center justify-center">
-      <nav className="flex items-center gap-1 p-1 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-lg border border-zinc-200 dark:border-zinc-800 rounded-full shadow-lg">
+    <div className="flex items-center justify-center px-2">
+      <nav className="flex items-center gap-0.5 sm:gap-1 p-1 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-lg border border-zinc-200 dark:border-zinc-800 rounded-full shadow-lg">
         {navItems.map((item) => {
           const isActive = activeTab === item.label;
 
@@ -66,18 +66,18 @@ export default function BottomNavBar() {
               key={item.label}
               onClick={() => scrollToSection(item.href, item.label)}
               className={cn(
-                "relative flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium transition-colors rounded-full",
+                "relative flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-colors rounded-full",
                 isActive
-                  ? "text-blue-600 dark:text-blue-400"
+                  ? "text-[#FF3D00]"
                   : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
               )}
             >
-              <item.icon className="w-4 h-4" />
+              <item.icon className="w-4 h-4 flex-shrink-0" />
               <span className="hidden sm:inline">{item.label}</span>
               {isActive && (
                 <motion.div
                   layoutId="active-pill"
-                  className="absolute inset-0 bg-blue-50 dark:bg-blue-900/20 rounded-full -z-10"
+                  className="absolute inset-0 bg-[#FF3D00]/10 rounded-full -z-10"
                   transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                 />
               )}

@@ -316,7 +316,7 @@ export function CinematicFooter() {
           <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 mt-20 w-full max-w-5xl mx-auto">
             <h2
               ref={headingRef}
-              className="text-5xl md:text-8xl font-black footer-text-glow tracking-tighter mb-12 text-center"
+              className="text-4xl sm:text-5xl md:text-8xl font-black footer-text-glow tracking-tighter mb-8 sm:mb-12 text-center"
             >
               Ready to begin?
             </h2>
@@ -344,16 +344,16 @@ export function CinematicFooter() {
             </div>
           </div>
 
-          {/* 3. Bottom Bar / Credits — 3-column grid keeps badge perfectly centred */}
-          <div className="relative z-20 w-full pb-8 px-6 md:px-12 grid grid-cols-3 items-center gap-4">
+          {/* 3. Bottom Bar */}
+          <div className="relative z-20 w-full pb-6 sm:pb-8 px-4 sm:px-6 md:px-12 flex flex-col sm:grid sm:grid-cols-3 items-center gap-3 sm:gap-4">
 
             {/* Left: Copyright */}
-            <div className="text-muted-foreground text-[10px] md:text-xs font-semibold tracking-widest uppercase">
+            <div className="text-muted-foreground text-[10px] md:text-xs font-semibold tracking-widest uppercase order-2 sm:order-1">
               © 2026 Yashashvi Advertising.
             </div>
 
             {/* Centre: Badge */}
-            <div className="flex justify-center">
+            <div className="flex justify-center order-1 sm:order-2">
               <div className="footer-glass-pill px-5 py-2.5 rounded-full flex items-center gap-2 cursor-default">
                 <span className="text-muted-foreground text-[10px] md:text-xs font-bold uppercase tracking-widest">Crafted with</span>
                 <span className="animate-footer-heartbeat text-sm md:text-base" style={{ color: '#ef4444' }}>❤</span>
@@ -371,7 +371,7 @@ export function CinematicFooter() {
             </div>
 
             {/* Right: Back to top */}
-            <div className="flex justify-end">
+            <div className="flex justify-end order-3">
               <MagneticButton
                 as="button"
                 onClick={scrollToTop}
