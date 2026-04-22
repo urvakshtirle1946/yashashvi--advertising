@@ -5,10 +5,11 @@ import React, { useState } from "react";
 type Brand = {
   name: string;
   logo: string;
+  h?: string; // optional tailwind height class, defaults to h-8
 };
 
 const brands: Brand[] = [
-  { name: "MP Birla Cement",      logo: "https://oyjhphtepgrvrbytbais.supabase.co/storage/v1/object/public/brands/MP%20Birla.jpg" },
+  { name: "MP Birla Cement",      logo: "https://oyjhphtepgrvrbytbais.supabase.co/storage/v1/object/public/brands/MP%20Birla.jpg", h: "h-14" },
   { name: "Probus Insurance",     logo: "https://logo.clearbit.com/probusinsurance.com" },
   { name: "Johnson Tiles",        logo: "https://logo.clearbit.com/johnsontiles.com" },
   { name: "CEAT",                 logo: "https://logo.clearbit.com/ceat.com" },
@@ -41,6 +42,8 @@ const brands: Brand[] = [
 function BrandTile({ brand }: { brand: Brand }) {
   const [failed, setFailed] = useState(false);
 
+  const heightClass = brand.h ?? "h-8";
+
   return (
     <div className="flex items-center justify-center w-36 shrink-0 px-2">
       {brand.logo && !failed ? (
@@ -49,7 +52,7 @@ function BrandTile({ brand }: { brand: Brand }) {
           alt={brand.name}
           title={brand.name}
           onError={() => setFailed(true)}
-          className="h-8 w-auto max-w-[120px] object-contain grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+          className={`${heightClass} w-auto max-w-[140px] object-contain grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300`}
           loading="lazy"
         />
       ) : (
