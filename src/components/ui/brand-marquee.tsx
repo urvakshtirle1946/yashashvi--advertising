@@ -5,12 +5,13 @@ import React, { useState } from "react";
 type Brand = {
   name: string;
   logo: string;
-  h?: string;    // optional tailwind height class, defaults to h-8
-  maxW?: string; // optional max-width class, defaults to max-w-[140px]
+  h?: string;      // optional tailwind height class, defaults to h-8
+  maxW?: string;   // optional max-width class, defaults to max-w-[140px]
+  tileBg?: string; // optional background color for logos that need contrast
 };
 
 const brands: Brand[] = [
-  { name: "MP Birla Cement",      logo: "https://oyjhphtepgrvrbytbais.supabase.co/storage/v1/object/public/brands/MP%20Birla.jpg", h: "h-20", maxW: "max-w-[180px]" },
+  { name: "MP Birla Cement",      logo: "https://oyjhphtepgrvrbytbais.supabase.co/storage/v1/object/public/brands/MP%20Birla.jpg", h: "h-16", maxW: "max-w-[160px]", tileBg: "#1a3a6b" },
   { name: "Probus Insurance",     logo: "https://logo.clearbit.com/probusinsurance.com" },
   { name: "Johnson Tiles",        logo: "https://logo.clearbit.com/johnsontiles.com" },
   { name: "CEAT",                 logo: "https://logo.clearbit.com/ceat.com" },
@@ -47,16 +48,25 @@ function BrandTile({ brand }: { brand: Brand }) {
   const maxWClass   = brand.maxW ?? "max-w-[140px]";
 
   return (
-    <div className="flex items-center justify-center w-36 shrink-0 px-2">
+    <div className="flex items-center justify-center w-44 shrink-0 px-2">
       {brand.logo && !failed ? (
-        <img
-          src={brand.logo}
-          alt={brand.name}
-          title={brand.name}
-          onError={() => setFailed(true)}
-          className={`${heightClass} w-auto ${maxWClass} object-contain grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300`}
-          loading="lazy"
-        />
+        <div
+          className="flex items-center justify-center rounded-xl px-3 py-2 transition-all duration-300 hover:scale-105"
+          style={brand.tileBg ? { backgroundColor: brand.tileBg } : {}}
+        >
+          <img
+            src={brand.logo}
+            alt={brand.name}
+            title={brand.name}
+            onError={() => setFailed(true)}
+            className={`${heightClass} w-auto ${maxWClass} object-contain ${
+              brand.tileBg
+                ? "opacity-100 brightness-110"
+                : "grayscale hover:grayscale-0 opacity-70 hover:opacity-100"
+            } transition-all duration-300`}
+            loading="lazy"
+          />
+        </div>
       ) : (
         <span className="text-sm font-semibold text-gray-500 whitespace-nowrap tracking-wide hover:text-gray-800 transition-colors duration-200">
           {brand.name}

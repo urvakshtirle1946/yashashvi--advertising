@@ -14,10 +14,11 @@ type Brand = {
   logo: string;
   abbr: string;
   bg: string;
+  imgClass?: string;
 };
 
 const brands: Brand[] = [
-  { name: "MP Birla Cement",  logo: asset("MP Birla.jpg"),      abbr: "MPC",  bg: "#C0392B" },
+  { name: "MP Birla Cement",  logo: asset("MP Birla.jpg"),      abbr: "MPC",  bg: "#C0392B", imgClass: "h-14 max-w-[170px]" },
   { name: "Probus Insurance", logo: asset("probus.jpg"),         abbr: "PRO",  bg: "#2980B9" },
   { name: "Johnson Tiles",    logo: asset("Jhonson.jpg"),        abbr: "JT",   bg: "#E67E22" },
   { name: "CEAT",             logo: asset("CEAT.jpg"),           abbr: "CEAT", bg: "#E74C3C" },
@@ -57,7 +58,7 @@ function BrandItem({ brand }: { brand: Brand }) {
           alt={brand.name}
           onError={() => setFailed(true)}
           loading="eager"
-          className="h-10 w-auto max-w-[110px] object-contain"
+          className={`w-auto object-contain ${brand.imgClass ?? "h-10 max-w-[110px]"}`}
         />
       ) : (
         <div
