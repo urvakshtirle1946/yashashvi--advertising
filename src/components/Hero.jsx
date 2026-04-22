@@ -80,6 +80,15 @@ const Hero = () => {
         />
       </div>
 
+      {/* Logo — top left */}
+      <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-30">
+        <img
+          src="/logo1.png"
+          alt="Yashashvi Advertising Logo"
+          className="h-12 sm:h-16 md:h-20 w-auto object-contain drop-shadow-lg"
+        />
+      </div>
+
       {/* Hero Content */}
       <motion.div
         className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 sm:py-32"

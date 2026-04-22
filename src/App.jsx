@@ -7,6 +7,7 @@ import About from './components/About.jsx';
 import Portfolio from './components/Portfolio.jsx';
 import BottomNavBar from './components/ui/bottom-nav-bar';
 import { CinematicFooter } from './components/ui/motion-footer';
+import BrandMarqueeSection from './components/ui/brand-scoller';
 
 function App() {
   useEffect(() => {
@@ -43,6 +44,7 @@ function App() {
       */}
       <main className="relative z-10 w-full min-h-[120vh] bg-white shadow-2xl rounded-b-3xl overflow-hidden">
         <Hero />
+        <BrandMarqueeSection />
         <About />
         <Services />
         <Portfolio />
