@@ -52,6 +52,15 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 0px;
+  /* Hide scrollbar — Firefox */
+  scrollbar-width: none;
+  /* Hide scrollbar — IE/Edge */
+  -ms-overflow-style: none;
+}
+
+/* Hide scrollbar — Chrome/Safari/Opera */
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
