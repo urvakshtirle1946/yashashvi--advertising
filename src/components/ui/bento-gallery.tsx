@@ -25,15 +25,6 @@ interface InteractiveImageBentoGalleryProps {
   description: string
 }
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.07,
-    },
-  },
-}
-
 const itemVariants = {
   hidden: { opacity: 0, y: 20, scale: 0.95 },
   visible: {
@@ -63,16 +54,16 @@ const MediaModal = ({
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 20 }}
-        className="relative w-full max-w-5xl p-4"
+        className="relative w-full max-w-5xl p-3 sm:p-4"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button — inside stopPropagation wrapper */}
+        {/* Close button inside stopPropagation */}
         <button
           onClick={(e) => { e.stopPropagation(); onClose(); }}
-          className="absolute right-2 top-2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-colors hover:bg-[#FF3D00] hover:text-white border border-white/20"
+          className="absolute right-4 top-4 sm:right-6 sm:top-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-colors hover:bg-[#FF3D00] hover:text-white border border-white/20"
           aria-label="Close"
         >
-          <X size={20} />
+          <X size={18} />
         </button>
 
         {item.type === "video" ? (
@@ -80,23 +71,78 @@ const MediaModal = ({
             src={item.url}
             controls
             autoPlay
-            className="h-auto max-h-[85vh] w-full rounded-xl object-contain shadow-2xl"
+            playsInline
+            className="h-auto max-h-[80vh] w-full rounded-xl object-contain shadow-2xl"
           />
         ) : (
           <img
             src={item.url}
             alt={item.title}
-            className="h-auto max-h-[85vh] w-full rounded-xl object-contain shadow-2xl"
+            className="h-auto max-h-[80vh] w-full rounded-xl object-contain shadow-2xl"
           />
         )}
-        <div className="mt-3 text-center">
-          <h3 className="text-lg font-semibold text-white">{item.title}</h3>
-          {item.desc && <p className="text-sm text-white/60 mt-1">{item.desc}</p>}
+        <div className="mt-2 sm:mt-3 text-center">
+          <h3 className="text-base sm:text-lg font-semibold text-white">{item.title}</h3>
+          {item.desc && <p className="text-xs sm:text-sm text-white/60 mt-1">{item.desc}</p>}
         </div>
       </motion.div>
     </motion.div>
   )
 }
+
+/* ─── Card shared between both layouts ─── */
+const GalleryCard = ({
+  item,
+  onClick,
+  className,
+}: {
+  item: GalleryItem
+  onClick: () => void
+  className?: string
+}) => (
+  <motion.div
+    variants={itemVariants}
+    className={cn(
+      "group relative flex items-end overflow-hidden rounded-xl bg-gray-900 cursor-pointer shadow-sm hover:shadow-lg transition-shadow duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF3D00]",
+      className
+    )}
+    whileHover={{ scale: 1.02 }}
+    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+    onClick={onClick}
+    onKeyDown={(e) => e.key === "Enter" && onClick()}
+    tabIndex={0}
+    aria-label={`View ${item.title}`}
+  >
+    {item.type === "video" ? (
+      <>
+        <video
+          src={item.url}
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          onMouseEnter={(e) => (e.target as HTMLVideoElement).play()}
+          onMouseLeave={(e) => (e.target as HTMLVideoElement).pause()}
+        />
+        <div className="absolute top-2 right-2 sm:top-3 sm:right-3 z-20 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white transition-all duration-300 group-hover:bg-[#FF3D00] group-hover:border-[#FF3D00]">
+          <Play size={12} fill="white" />
+        </div>
+      </>
+    ) : (
+      <img
+        src={item.url}
+        alt={item.title}
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+      />
+    )}
+    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+    <div className="relative z-10 p-3 sm:p-4 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+      <h3 className="text-sm sm:text-lg font-bold text-white">{item.title}</h3>
+      <p className="mt-0.5 text-xs sm:text-sm text-white/80">{item.desc}</p>
+    </div>
+  </motion.div>
+)
 
 const InteractiveImageBentoGallery: React.FC<InteractiveImageBentoGalleryProps> = ({
   imageItems,
@@ -114,8 +160,7 @@ const InteractiveImageBentoGallery: React.FC<InteractiveImageBentoGalleryProps> 
       if (gridRef.current && containerRef.current) {
         const containerWidth = containerRef.current.offsetWidth
         const gridWidth = gridRef.current.scrollWidth
-        const newConstraint = Math.min(0, containerWidth - gridWidth - 32)
-        setDragConstraint(newConstraint)
+        setDragConstraint(Math.min(0, containerWidth - gridWidth - 32))
       }
     }
     calculateConstraints()
@@ -133,23 +178,45 @@ const InteractiveImageBentoGallery: React.FC<InteractiveImageBentoGalleryProps> 
   return (
     <section
       ref={targetRef}
-      className="relative w-full overflow-hidden bg-white py-16 sm:py-24"
+      className="relative w-full overflow-hidden bg-white py-12 sm:py-16 md:py-24"
     >
+      {/* Section Header */}
       <motion.div
         style={{ opacity, y }}
-        className="container mx-auto px-4 text-center"
+        className="container mx-auto px-4 text-center mb-8 sm:mb-12"
       >
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-gray-900">
           {title}
         </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-500">
+        <p className="mx-auto mt-3 max-w-2xl text-sm sm:text-base md:text-lg text-gray-500 px-2">
           {description}
         </p>
       </motion.div>
 
+      {/* ── MOBILE: 2-column vertical grid (< md) ── */}
+      <div className="block md:hidden px-3">
+        <motion.div
+          className="grid grid-cols-2 gap-2"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ staggerChildren: 0.05 }}
+        >
+          {imageItems.map((item) => (
+            <GalleryCard
+              key={item.id}
+              item={item}
+              onClick={() => setSelectedItem(item)}
+              className="h-36 xs:h-40"
+            />
+          ))}
+        </motion.div>
+      </div>
+
+      {/* ── DESKTOP: Horizontal drag gallery (>= md) ── */}
       <div
         ref={containerRef}
-        className="relative mt-12 w-full cursor-grab active:cursor-grabbing"
+        className="hidden md:block relative w-full cursor-grab active:cursor-grabbing"
       >
         <motion.div
           className="w-max"
@@ -159,60 +226,32 @@ const InteractiveImageBentoGallery: React.FC<InteractiveImageBentoGalleryProps> 
         >
           <motion.div
             ref={gridRef}
-            className="grid auto-cols-[minmax(15rem,1fr)] grid-flow-col gap-4 px-4 md:px-8"
-            variants={containerVariants}
+            className="grid auto-cols-[minmax(15rem,1fr)] grid-flow-col gap-4 px-8"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
+            transition={{ staggerChildren: 0.07 }}
           >
             {imageItems.map((item) => (
-              <motion.div
+              <GalleryCard
                 key={item.id}
-                variants={itemVariants}
-                className={cn(
-                  "group relative flex h-full min-h-[15rem] w-full min-w-[15rem] cursor-pointer items-end overflow-hidden rounded-xl border border-gray-100 bg-gray-900 p-4 shadow-sm transition-shadow duration-300 ease-in-out hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF3D00] focus-visible:ring-offset-2",
-                  item.span
-                )}
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                item={item}
                 onClick={() => setSelectedItem(item)}
-                onKeyDown={(e) => e.key === "Enter" && setSelectedItem(item)}
-                tabIndex={0}
-                aria-label={`View ${item.title}`}
-              >
-                {item.type === "video" ? (
-                  <>
-                    <video
-                      src={item.url}
-                      muted
-                      loop
-                      playsInline
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      onMouseEnter={(e) => (e.target as HTMLVideoElement).play()}
-                      onMouseLeave={(e) => (e.target as HTMLVideoElement).pause()}
-                    />
-                    {/* Play badge */}
-                    <div className="absolute top-3 right-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white transition-all duration-300 group-hover:bg-[#FF3D00] group-hover:border-[#FF3D00]">
-                      <Play size={14} fill="white" />
-                    </div>
-                  </>
-                ) : (
-                  <img
-                    src={item.url}
-                    alt={item.title}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                )}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <div className="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-                  <h3 className="text-lg font-bold text-white">{item.title}</h3>
-                  <p className="mt-1 text-sm text-white/80">{item.desc}</p>
-                </div>
-              </motion.div>
+                className={cn("min-h-[15rem] min-w-[15rem]", item.span)}
+              />
             ))}
           </motion.div>
         </motion.div>
+
+        {/* Drag hint fade on edges */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-white to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white to-transparent" />
       </div>
+
+      {/* Drag hint text — desktop only */}
+      <p className="hidden md:block text-center text-xs text-gray-400 mt-4">
+        ← drag to explore →
+      </p>
 
       <AnimatePresence>
         {selectedItem && (
