@@ -15,12 +15,25 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // ── Config ────────────────────────────────────────────────────────────────────
 const SUPABASE_URL = 'https://oyjhphtepgrvrbytbais.supabase.co'
-const SUPABASE_KEY = 'sb_publishable_-4rDAn6jf9MICYQuF8JiXA__krGkeNj'
+
+// ⚠️  Use the SERVICE ROLE key (not the publishable key) — this is server-only
+// Get it from: Supabase Dashboard → Settings → API → service_role (secret)
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || 'PASTE_YOUR_SERVICE_ROLE_KEY_HERE'
+
 const BUCKET     = 'gallery'
 const GALLERY_DIR = path.join(__dirname, '..', 'public', 'gallery')
 // ──────────────────────────────────────────────────────────────────────────────
 
+if (SUPABASE_KEY === 'PASTE_YOUR_SERVICE_ROLE_KEY_HERE') {
+  console.error('\n❌ Please set your Supabase service role key!\n')
+  console.error('   Option A: Run with env var:')
+  console.error('   $env:SUPABASE_SERVICE_KEY="your-key"; node scripts/upload-gallery.mjs\n')
+  console.error('   Option B: Paste the key directly on line 18 of upload-gallery.mjs\n')
+  process.exit(1)
+}
+
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+
 
 const mimeTypes = {
   '.jpeg': 'image/jpeg',
@@ -31,16 +44,17 @@ const mimeTypes = {
   '.mov':  'video/quicktime',
 }
 
-async function ensureBucket() {
-  const { data: buckets } = await supabase.storage.listBuckets()
-  const exists = buckets?.some(b => b.name === BUCKET)
-  if (!exists) {
-    const { error } = await supabase.storage.createBucket(BUCKET, { public: true })
-    if (error) throw new Error(`Failed to create bucket: ${error.message}`)
-    console.log(`✅ Created bucket "${BUCKET}"`)
-  } else {
-    console.log(`📦 Bucket "${BUCKET}" already exists`)
+async function checkBucket() {
+  const { data, error } = await supabase.storage.from(BUCKET).list('', { limit: 1 })
+  if (error) {
+    throw new Error(
+      `❌ Cannot access bucket "${BUCKET}".\n` +
+      `   Please create it manually in Supabase Dashboard → Storage → New Bucket\n` +
+      `   Name: gallery | Public: ON\n` +
+      `   Error: ${error.message}`
+    )
   }
+  console.log(`📦 Bucket "${BUCKET}" found and accessible`)
 }
 
 async function uploadFile(filename) {
@@ -69,7 +83,7 @@ async function uploadFile(filename) {
 async function main() {
   console.log('\n🚀 Starting gallery upload to Supabase Storage...\n')
 
-  await ensureBucket()
+  await checkBucket()
 
   const files = fs.readdirSync(GALLERY_DIR).filter(f => {
     const ext = path.extname(f).toLowerCase()
