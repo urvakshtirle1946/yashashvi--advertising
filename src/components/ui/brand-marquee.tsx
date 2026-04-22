@@ -8,7 +8,7 @@ type Brand = {
 };
 
 const brands: Brand[] = [
-  { name: "MP Birla Cement",      logo: "https://logo.clearbit.com/mpcementworld.com" },
+  { name: "MP Birla Cement",      logo: "https://oyjhphtepgrvrbytbais.supabase.co/storage/v1/object/public/brands/MP%20Birla.jpg" },
   { name: "Probus Insurance",     logo: "https://logo.clearbit.com/probusinsurance.com" },
   { name: "Johnson Tiles",        logo: "https://logo.clearbit.com/johnsontiles.com" },
   { name: "CEAT",                 logo: "https://logo.clearbit.com/ceat.com" },
