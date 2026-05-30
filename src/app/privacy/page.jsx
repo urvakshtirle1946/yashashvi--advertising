@@ -22,24 +22,23 @@ export default function PrivacyPage() {
         <div className="prose prose-gray max-w-none space-y-8 text-gray-700 leading-relaxed">
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">1. Information We Collect</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">1. Information We Collect for Signage Orders</h2>
             <p>
-              When you use our contact form or reach out to us, we collect information you
-              voluntarily provide, including your name, email address, phone number, and any
-              message contents. We do not collect data passively beyond standard server logs.
+              When you submit a query through our contact forms, request custom flex printing quotes, or inquire about personalized sign boards, promotional posters, or outdoor hoardings in Indore, Madhya Pradesh, we collect the data you voluntarily share. This includes contact details (name, email address, phone number), business profiles, custom design files, and specifications for your customized flex banners, neon glow boards, or LED display units.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">2. How We Use Your Information</h2>
-            <p>We use the information you provide to:</p>
-            <ul className="list-disc list-inside mt-2 space-y-1">
-              <li>Respond to your enquiries and service requests</li>
-              <li>Provide quotations and follow-up communications</li>
-              <li>Improve our website and offerings</li>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">2. How We Use Your Branding & Design Data</h2>
+            <p>We process your information exclusively to deliver high-quality advertising media and custom printing solutions in Indore. Specifically, we use your data to:</p>
+            <ul className="list-disc pl-5 mt-2 space-y-1">
+              <li>Formulate precise vector graphic drafts, layout designs, and custom flex board print previews.</li>
+              <li>Generate commercial estimates and custom quotes for glow sign boards, poster printing, banners, and digital display solutions.</li>
+              <li>Coordinate shipment, transport logistics, and on-site physical installation of heavy billboards, shop banners, or LED display systems.</li>
+              <li>Provide customer support regarding order revisions or safety standards.</li>
             </ul>
             <p className="mt-3">
-              We do not sell, trade, or rent your personal information to third parties.
+              We do not sell, trade, or distribute your personal details, design configurations, or graphic assets to third-party brokers.
             </p>
           </section>
 
@@ -84,14 +83,13 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">7. Contact</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">7. Contact for Indore Flex & Signage Services</h2>
             <p>
-              If you have any questions about this Privacy Policy, please contact us at:
+              If you have any questions about this Privacy Policy, your graphic files, or custom poster and board orders in Indore, please contact us:
             </p>
             <div className="mt-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
               <p className="font-semibold">Yashashvi Advertising</p>
               <p>Indore, Madhya Pradesh, India</p>
-
             </div>
           </section>
         </div>

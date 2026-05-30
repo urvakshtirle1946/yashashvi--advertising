@@ -31,75 +31,73 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">2. Services</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">2. Services & Custom Signage</h2>
             <p>
-              Yashashvi Advertising provides signage design, fabrication, and installation
-              services including, but not limited to, billboards, glow sign boards, LED displays,
-              3D letters, and shop signage. All service agreements are subject to a separate
-              written contract or purchase order.
+              Yashashvi Advertising is Indore's leading service provider for custom signage fabrication, branding, and high-quality flex board printing. We specialize in the conceptualization, design, fabrication, and installation of advertising materials. Our core services include premium flex printing, custom outdoor banners, glow sign boards, 3D acrylic letters, shop banners, custom poster printing, commercial LED display boards, and high-visibility highway safety signage in Indore, Madhya Pradesh. All project work is subject to separate client-approved written agreements.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">3. Quotations & Pricing</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">3. Scope of Signage, Flex Printing & Posters</h2>
             <p>
-              All quotations provided are valid for 30 days from the date of issue unless
-              otherwise stated. Prices are subject to change based on material costs,
-              specifications, and project scope.
+              Our custom visual communication solutions cover a wide range of promotional products and custom boards in Indore, including:
+            </p>
+            <ul className="list-disc pl-5 mt-2 space-y-1">
+              <li><strong>Flex Printing & Flex Banners:</strong> Top-tier frontlit and backlit flex boards, star flex, heavy-duty vinyl banner printing, and outdoor advertisement flex.</li>
+              <li><strong>Illuminated Glow Boards & LED Displays:</strong> Custom glow sign boards, neon light signs, 3D acrylic letters, metal letters, and digital LED boards.</li>
+              <li><strong>Advertising Posters & Hoardings:</strong> Premium quality gloss/matte posters, shop poster boards, large-format road hoardings, and promotional banners.</li>
+              <li><strong>Radium Sign Boards:</strong> High-visibility retroreflective highway radium signages, delineators, and traffic signs.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">4. Quotations & Pricing</h2>
+            <p>
+              All promotional signage and flex printing quotes provided are valid for 30 days from the date of issue. Prices for custom boards, poster designs, and banner printing are calculated based on raw material costs, size, specs, and complexity.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">4. Payment Terms</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">5. Payment Terms</h2>
             <p>
-              Standard payment terms require a 50% advance deposit before work commences, with
-              the remaining balance payable upon completion and before installation. Specific
-              payment terms will be outlined in the project agreement.
+              Standard terms require a 50% advance deposit before any flex printing, banner designing, or board fabrication work commences. The remaining balance is payable upon complete installation of your custom boards, posters, or LED displays.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">5. Intellectual Property</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">6. Intellectual Property</h2>
             <p>
-              All designs, concepts, and creative work produced by Yashashvi Advertising remain
-              our intellectual property until full payment is received. Upon full payment, the
-              client receives a non-exclusive licence to use the completed work for its intended
-              purpose.
+              All custom graphic layouts, poster drafts, flex banner designs, and creative billboard concepts produced by Yashashvi Advertising Indore remain our sole intellectual property until full invoice settlement.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">6. Limitation of Liability</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">7. Limitation of Liability</h2>
             <p>
-              Yashashvi Advertising shall not be liable for any indirect, incidental, or
-              consequential damages arising from the use of our services. Our maximum liability
-              is limited to the total value of the specific project in question.
+              Yashashvi Advertising shall not be liable for any indirect damages arising from the installation of custom sign boards, flex banners, posters, or LED boards.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">7. Governing Law</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">8. Governing Law</h2>
             <p>
-              These Terms of Service are governed by the laws of Maharashtra, India. Any disputes
-              shall be resolved in the courts of Nagpur, Maharashtra.
+              These Terms of Service are governed by the laws of Madhya Pradesh, India. Any disputes arising from signage or flex printing services shall be resolved in the courts of Indore, Madhya Pradesh.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">8. Changes to Terms</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">9. Changes to Terms</h2>
             <p>
-              We reserve the right to update these Terms of Service at any time. Continued use
-              of our services after changes constitutes acceptance of the revised terms.
+              We reserve the right to update these terms to incorporate new guidelines for advertising media, banners, and digital display boards.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">9. Contact</h2>
-            <p>For questions about these Terms, please contact us:</p>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">10. Contact for Indore Signage & Flex Services</h2>
+            <p>For questions about our sign boards, flex printing, banners, or poster pricing in Indore, please contact us:</p>
             <div className="mt-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
               <p className="font-semibold">Yashashvi Advertising</p>
               <p>Indore, Madhya Pradesh, India</p>
-
             </div>
           </section>
         </div>

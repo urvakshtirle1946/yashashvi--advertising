@@ -2,6 +2,11 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
+export const metadata = {
+  title: "Privacy Policy | Yashashvi Advertising",
+  description: "Privacy Policy for Yashashvi Advertising — learn how we protect your personal and business data for our Indore signage and flex printing services.",
+};
+
 export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen bg-gray-50 pt-24 pb-12 px-4 sm:px-6 lg:px-8">
