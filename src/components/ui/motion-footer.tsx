@@ -2,15 +2,9 @@
 
 import * as React from "react";
 import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
 import { HeroButtonExpendable } from "./hero-button-expendable";
-
-// Register ScrollTrigger safely for React
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { motion, useScroll, useTransform } from "framer-motion";
 
 // -------------------------------------------------------------------------
 // 1. THEME-ADAPTIVE INLINE STYLES
@@ -144,47 +138,35 @@ const MagneticButton = React.forwardRef<HTMLElement, MagneticButtonProps>(
       const element = localRef.current;
       if (!element) return;
 
-      const ctx = gsap.context(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-          const rect = element.getBoundingClientRect();
-          const h = rect.width / 2;
-          const w = rect.height / 2;
-          const x = e.clientX - rect.left - h;
-          const y = e.clientY - rect.top - w;
+      // Set initial 3D styles
+      element.style.transition = "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)";
+      element.style.transformStyle = "preserve-3d";
 
-          gsap.to(element, {
-            x: x * 0.4,
-            y: y * 0.4,
-            rotationX: -y * 0.15,
-            rotationY: x * 0.15,
-            scale: 1.05,
-            ease: "power2.out",
-            duration: 0.4,
-          });
-        };
+      const handleMouseMove = (e: MouseEvent) => {
+        const rect = element.getBoundingClientRect();
+        const h = rect.width / 2;
+        const w = rect.height / 2;
+        const x = e.clientX - rect.left - h;
+        const y = e.clientY - rect.top - w;
 
-        const handleMouseLeave = () => {
-          gsap.to(element, {
-            x: 0,
-            y: 0,
-            rotationX: 0,
-            rotationY: 0,
-            scale: 1,
-            ease: "elastic.out(1, 0.3)",
-            duration: 1.2,
-          });
-        };
+        // Interactive responsive follow transition
+        element.style.transition = "transform 0.1s cubic-bezier(0.25, 1, 0.5, 1)";
+        element.style.transform = `translate3d(${x * 0.4}px, ${y * 0.4}px, 0) rotateX(${-y * 0.15}deg) rotateY(${x * 0.15}deg) scale3d(1.05, 1.05, 1.05)`;
+      };
 
-        element.addEventListener("mousemove", handleMouseMove as any);
-        element.addEventListener("mouseleave", handleMouseLeave);
+      const handleMouseLeave = () => {
+        // Slow elastic-like return to original position
+        element.style.transition = "transform 0.8s cubic-bezier(0.25, 1.05, 0.42, 1.2)";
+        element.style.transform = "translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+      };
 
-        return () => {
-          element.removeEventListener("mousemove", handleMouseMove as any);
-          element.removeEventListener("mouseleave", handleMouseLeave);
-        };
-      }, element);
+      element.addEventListener("mousemove", handleMouseMove as any);
+      element.addEventListener("mouseleave", handleMouseLeave);
 
-      return () => ctx.revert();
+      return () => {
+        element.removeEventListener("mousemove", handleMouseMove as any);
+        element.removeEventListener("mouseleave", handleMouseLeave);
+      };
     }, []);
 
     return (
@@ -221,55 +203,21 @@ const MarqueeItem = () => (
 
 export function CinematicFooter() {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const giantTextRef = useRef<HTMLDivElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const linksRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (!wrapperRef.current) return;
+  // Framer Motion native high-performance declarative viewport scroll tracking
+  const { scrollYProgress } = useScroll({
+    target: wrapperRef,
+    offset: ["start end", "end end"],
+  });
 
-    // React strict mode compatible GSAP context cleanup
-    const ctx = gsap.context(() => {
-      // Background Parallax
-      gsap.fromTo(
-        giantTextRef.current,
-        { y: "10vh", scale: 0.8, opacity: 0 },
-        {
-          y: "0vh",
-          scale: 1,
-          opacity: 1,
-          ease: "power1.out",
-          scrollTrigger: {
-            trigger: wrapperRef.current,
-            start: "top 80%",
-            end: "bottom bottom",
-            scrub: 1,
-          },
-        }
-      );
+  // Background Parallax
+  const giantY = useTransform(scrollYProgress, [0, 1], ["10vh", "0vh"]);
+  const giantScale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+  const giantOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
-      // Staggered Content Reveal
-      gsap.fromTo(
-        [headingRef.current, linksRef.current],
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: wrapperRef.current,
-            start: "top 40%",
-            end: "bottom bottom",
-            scrub: 1,
-          },
-        }
-      );
-    }, wrapperRef);
-
-    return () => ctx.revert();
-  }, []);
+  // Staggered Content Reveal
+  const contentY = useTransform(scrollYProgress, [0.3, 1], [50, 0]);
+  const contentOpacity = useTransform(scrollYProgress, [0.3, 1], [0, 1]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -297,12 +245,12 @@ export function CinematicFooter() {
           <div className="footer-bg-grid absolute inset-0 z-0 pointer-events-none" />
 
           {/* Giant background text */}
-          <div
-            ref={giantTextRef}
+          <motion.div
+            style={{ y: giantY, scale: giantScale, opacity: giantOpacity }}
             className="footer-giant-bg-text absolute -bottom-[5vh] left-1/2 -translate-x-1/2 whitespace-nowrap z-0 pointer-events-none select-none"
           >
             GROWTH
-          </div>
+          </motion.div>
 
           {/* 1. Diagonal Sleek Marquee (Top of footer) */}
           <div className="absolute top-12 left-0 w-full overflow-hidden border-y border-border/50 bg-background/60 backdrop-blur-md py-4 z-10 -rotate-2 scale-110 shadow-2xl">
@@ -314,15 +262,18 @@ export function CinematicFooter() {
 
           {/* 2. Main Center Content */}
           <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 mt-20 w-full max-w-5xl mx-auto">
-            <h2
-              ref={headingRef}
+            <motion.h2
+              style={{ y: contentY, opacity: contentOpacity }}
               className="text-4xl sm:text-5xl md:text-8xl font-black footer-text-glow tracking-tighter mb-8 sm:mb-12 text-center"
             >
               Ready to begin?
-            </h2>
+            </motion.h2>
 
             {/* Interactive Magnetic Pills Layout */}
-            <div ref={linksRef} className="flex flex-col items-center gap-6 w-full">
+            <motion.div
+              style={{ y: contentY, opacity: contentOpacity }}
+              className="flex flex-col items-center gap-6 w-full"
+            >
               {/* Primary CTA — opens the contact modal */}
               <div className="flex justify-center w-full">
                 <HeroButtonExpendable
@@ -341,7 +292,7 @@ export function CinematicFooter() {
                   Terms of Service
                 </MagneticButton>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* 3. Bottom Bar */}

@@ -42,34 +42,17 @@ export function HeroButtonExpendable({
   return (
     <>
       {/* Inline CTA Button */}
-      <AnimatePresence mode="wait">
-        {!isExpanded && (
-          <motion.div
-            className="inline-block relative"
-            style={{ minWidth: "180px", minHeight: "56px" }}
-          >
-            <motion.div
-              layoutId={layoutId}
-              style={{ borderRadius: "100px" }}
-              className={cn(
-                "absolute inset-0 bg-[#FF3D00] shadow-[0_0_30px_rgba(255,61,0,0.5)]",
-                className
-              )}
-            />
-            <motion.button
-              initial={{ opacity: 0, scale: 0.85, y: 6 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 0.15, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2, ease: "easeIn" } }}
-              onClick={handleExpand}
-              className="relative flex items-center justify-center gap-2 h-14 px-8 py-3 text-lg font-semibold text-white tracking-wide hover:opacity-90 transition-opacity whitespace-nowrap"
-            >
-              {buttonText}
-              <Mail className="w-5 h-5 ml-1" />
-            </motion.button>
-          </motion.div>
+      <button
+        onClick={handleExpand}
+        className={cn(
+          "inline-flex items-center justify-center gap-2 h-14 px-8 py-3 text-lg font-semibold text-white tracking-wide rounded-full bg-[#FF3D00] shadow-[0_0_30px_rgba(255,61,0,0.5)] hover:opacity-90 transition-opacity whitespace-nowrap cursor-pointer z-10",
+          className
         )}
-      </AnimatePresence>
+        style={{ minWidth: "180px", minHeight: "56px" }}
+      >
+        {buttonText}
+        <Mail className="w-5 h-5 ml-1" />
+      </button>
 
       {/* Expanded Modal Portal */}
       {mounted &&
@@ -88,14 +71,15 @@ export function HeroButtonExpendable({
 
                 {/* Expanding Card */}
                 <motion.div
-                  layoutId={layoutId}
+                  initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: 15 }}
                   transition={{
                     type: "spring",
                     stiffness: 260,
                     damping: 30,
                     mass: 1,
                   }}
-                  initial={{ borderRadius: "24px", width: "100%", height: "100%" }}
                   style={{ borderRadius: "24px" }}
                   className="relative flex h-full w-full sm:h-[90vh] sm:max-h-[840px] sm:w-[92vw] sm:max-w-5xl overflow-hidden sm:rounded-[24px] shadow-2xl z-10"
                 >
