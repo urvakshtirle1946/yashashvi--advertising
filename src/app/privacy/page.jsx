@@ -91,6 +91,7 @@ export default function PrivacyPage() {
             <div className="mt-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
               <p className="font-semibold">Yashashvi Advertising</p>
               <p>Indore, Madhya Pradesh, India</p>
+
             </div>
           </section>
         </div>

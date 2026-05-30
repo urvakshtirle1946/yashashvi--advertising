@@ -80,8 +80,8 @@ export default function TermsPage() {
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">7. Governing Law</h2>
             <p>
-              These Terms of Service are governed by the laws of Madhya Pradesh, India. Any disputes
-              shall be resolved in the courts of Indore, Madhya Pradesh.
+              These Terms of Service are governed by the laws of Maharashtra, India. Any disputes
+              shall be resolved in the courts of Nagpur, Maharashtra.
             </p>
           </section>
 
@@ -99,6 +99,7 @@ export default function TermsPage() {
             <div className="mt-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
               <p className="font-semibold">Yashashvi Advertising</p>
               <p>Indore, Madhya Pradesh, India</p>
+
             </div>
           </section>
         </div>
