@@ -90,18 +90,7 @@ export default function PrivacyPage() {
             </p>
             <div className="mt-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
               <p className="font-semibold">Yashashvi Advertising</p>
-              <p>Nagpur, Maharashtra, India</p>
-              <p>
-                LinkedIn:{" "}
-                <a
-                  href="https://www.linkedin.com/in/urvaksh-tirle"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#FF3D00] hover:underline"
-                >
-                  Urvaksh Tirle
-                </a>
-              </p>
+              <p>Indore, Madhya Pradesh, India</p>
             </div>
           </section>
         </div>

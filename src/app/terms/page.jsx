@@ -80,8 +80,8 @@ export default function TermsPage() {
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">7. Governing Law</h2>
             <p>
-              These Terms of Service are governed by the laws of Maharashtra, India. Any disputes
-              shall be resolved in the courts of Nagpur, Maharashtra.
+              These Terms of Service are governed by the laws of Madhya Pradesh, India. Any disputes
+              shall be resolved in the courts of Indore, Madhya Pradesh.
             </p>
           </section>
 
@@ -98,18 +98,7 @@ export default function TermsPage() {
             <p>For questions about these Terms, please contact us:</p>
             <div className="mt-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
               <p className="font-semibold">Yashashvi Advertising</p>
-              <p>Nagpur, Maharashtra, India</p>
-              <p>
-                LinkedIn:{" "}
-                <a
-                  href="https://www.linkedin.com/in/urvaksh-tirle"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#FF3D00] hover:underline"
-                >
-                  Urvaksh Tirle
-                </a>
-              </p>
+              <p>Indore, Madhya Pradesh, India</p>
             </div>
           </section>
         </div>
