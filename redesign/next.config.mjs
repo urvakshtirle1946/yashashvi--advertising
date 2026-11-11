@@ -1,12 +1,12 @@
-import { dirname } from "node:path";
+import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const projectRoot = dirname(fileURLToPath(import.meta.url));
+const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
 const nextConfig = {
-  outputFileTracingRoot: projectRoot,
+  outputFileTracingRoot: repoRoot,
   turbopack: {
-    root: projectRoot,
+    root: repoRoot,
   },
 };
 
