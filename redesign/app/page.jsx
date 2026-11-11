@@ -457,8 +457,8 @@ export default function HomePage() {
             </p>
           </section>
           <nav className="site-footer-links" aria-label="Footer links">
-            <a href="https://www.yashasviadvertising.works/privacy">Privacy Policy</a>
-            <a href="https://www.yashasviadvertising.works/terms">Terms of Service</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
           </nav>
           <div className="site-footer-cta">
             <ContactUsButton placement="footer" />

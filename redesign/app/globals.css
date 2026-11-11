@@ -183,6 +183,23 @@ img { display: block; max-width: 100%; }
 .full-gallery-item img, .full-gallery-item video { display: block; width: 100%; height: auto; }
 .full-gallery-item video { aspect-ratio: auto 16 / 9; background: #111; }
 
+.legal-page { min-height: 100vh; padding: 32px 28px 88px; background: #fff; color: #111; }
+.legal-page-inner { width: min(100%, 760px); margin: 0 auto; }
+.legal-back-link { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 52px; color: var(--red); text-decoration: none; font: 600 10px/1 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: .04em; text-transform: uppercase; }
+.legal-back-link:hover, .legal-back-link:focus-visible { text-decoration: underline; text-underline-offset: 4px; }
+.legal-back-link:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+.legal-page h1 { margin: 0 0 12px; font: 400 clamp(42px, 7vw, 76px)/.95 Georgia, "Times New Roman", serif; letter-spacing: -.055em; }
+.legal-updated { margin: 0 0 48px; color: #777; font-size: 12px; }
+.legal-copy { color: #444; font-size: 15px; line-height: 1.7; }
+.legal-copy section + section { margin-top: 32px; }
+.legal-copy h2 { margin: 0 0 10px; color: #111; font-size: 18px; line-height: 1.25; font-weight: 600; }
+.legal-copy p { margin: 0; }
+.legal-copy ul { margin: 10px 0 0; padding-left: 22px; }
+.legal-copy li + li { margin-top: 4px; }
+.legal-copy a { color: var(--red); text-underline-offset: 3px; }
+.legal-contact { margin-top: 12px; padding: 16px 18px; border: 1px solid #e5e5e5; border-radius: 3px; background: #f7f7f7; color: #343b3b; }
+.legal-contact p + p { margin-top: 4px; }
+
 .site-footer { position: relative; min-height: max(400px, var(--footer-art-height)); overflow: hidden; background-color: #97cccf; background-image: var(--footer-artwork); background-position: center top; background-repeat: no-repeat; background-size: 100% var(--footer-art-height); color: #101515; }
 .site-footer::before { position: absolute; z-index: 1; top: 0; left: 0; width: 100%; height: clamp(72px, 9vw, 144px); background: linear-gradient(to bottom, #fff 0%, rgba(255,255,255,.88) 26%, rgba(255,255,255,.36) 68%, rgba(255,255,255,0) 100%); content: ""; pointer-events: none; }
 .site-footer-details { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 48px; align-items: start; min-height: max(400px, var(--footer-art-height)); padding: 28px 32px 20px; }
@@ -263,6 +280,11 @@ img { display: block; max-width: 100%; }
   .full-gallery-eyebrow { margin-top: 18px; }
   .full-gallery-grid { columns: 2; column-gap: 12px; }
   .full-gallery-item { margin-bottom: 12px; }
+  .legal-page { padding: 24px 20px 64px; }
+  .legal-back-link { margin-bottom: 36px; }
+  .legal-updated { margin-bottom: 36px; }
+  .legal-copy { font-size: 14px; }
+  .legal-copy h2 { font-size: 17px; }
 }
 
 @media (min-width: 640px) {
