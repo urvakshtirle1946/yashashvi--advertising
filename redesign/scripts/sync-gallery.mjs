@@ -5,7 +5,8 @@ import { fileURLToPath } from "node:url";
 
 const appRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const sourceRoot = resolve(appRoot, "..", "public", "Gallery");
-const footerSource = resolve(appRoot, "..", "public", "footer.png");
+const rootFooterSource = resolve(appRoot, "..", "public", "footer.png");
+const bundledFooterSource = resolve(appRoot, "public", "footer.png");
 const publicRoot = resolve(appRoot, "public", "gallery");
 const manifestPath = resolve(appRoot, "app", "gallery-media.json");
 const footerDestination = resolve(appRoot, "public", "footer.png");
@@ -144,10 +145,22 @@ export async function syncGallery({ quiet = false } = {}) {
   return { count: nextManifest.length, manifestChanged };
 }
 
-export async function syncFooter({ quiet = false, source = footerSource, destination = footerDestination, manifest = footerManifestPath } = {}) {
-  const bytes = await readFile(source);
+async function findFooterSource() {
+  for (const candidate of [rootFooterSource, bundledFooterSource]) {
+    try {
+      if ((await stat(candidate)).isFile()) return candidate;
+    } catch (error) {
+      if (error.code !== "ENOENT") throw error;
+    }
+  }
+  throw new Error(`Required footer artwork is missing. Expected ${rootFooterSource} or ${bundledFooterSource}.`);
+}
+
+export async function syncFooter({ quiet = false, source, destination = footerDestination, manifest = footerManifestPath } = {}) {
+  const selectedSource = source ?? await findFooterSource();
+  const bytes = await readFile(selectedSource);
   if (bytes.length < 24 || bytes.toString("hex", 0, 8) !== "89504e470d0a1a0a") {
-    throw new Error(`Footer artwork must be a valid PNG: ${source}`);
+    throw new Error(`Footer artwork must be a valid PNG: ${selectedSource}`);
   }
   const width = bytes.readUInt32BE(16);
   const height = bytes.readUInt32BE(20);
@@ -162,7 +175,7 @@ export async function syncFooter({ quiet = false, source = footerSource, destina
   }
   if (destinationChecksum !== checksum) {
     await mkdir(dirname(destination), { recursive: true });
-    await copyFile(source, destination);
+    await copyFile(selectedSource, destination);
   }
 
   const footerManifest = {
@@ -174,7 +187,7 @@ export async function syncFooter({ quiet = false, source = footerSource, destina
   };
   const manifestChanged = await writeIfChanged(manifest, `${JSON.stringify(footerManifest, null, 2)}\n`);
   if (!quiet && (manifestChanged || destinationChecksum !== checksum)) {
-    console.log(`Footer sync: ${width}x${height} (${checksum.slice(0, 12)}) from ${source}`);
+    console.log(`Footer sync: ${width}x${height} (${checksum.slice(0, 12)}) from ${selectedSource}`);
   }
   return { checksum, width, height, manifestChanged, copied: destinationChecksum !== checksum };
 }

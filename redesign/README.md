@@ -28,7 +28,7 @@ Add loose media files to the repository's existing `public/Gallery/` folder (the
 
 The gallery is discovered in natural, numeric filename order. The homepage shows the first six photos in that order; videos are reserved for the full gallery at `/gallery`. When `npm run dev` is running, its folder watcher copies additions and updates the generated gallery manifest, and Next.js refreshes the page. A server restart also performs a fresh sync. `npm run build` syncs the folder before building. New deployed media therefore appears after the next build and redeploy; there is no separate upload system.
 
-The footer artwork source is the repository's root `public/footer.png`. The development watcher copies replacements into `redesign/public/`, updates the content-hashed image URL and aspect-ratio metadata, and triggers the page to refresh. Restarting the dev server performs a fresh sync; `npm run build` also syncs the latest artwork. A deployed replacement appears after the next build and redeploy.
+The footer artwork is bundled at `redesign/public/footer.png`, so clean checkouts and standalone deployments have the required asset. When the repository's root `public/footer.png` is present, it takes precedence during development/build sync and replaces the bundled copy. The watcher updates the content-hashed image URL and aspect-ratio metadata and triggers the page to refresh. Restarting the dev server performs a fresh sync; `npm run build` also syncs the latest artwork. A deployed replacement appears after the next build and redeploy. The required artwork format is PNG.
 # Preview asset notes
 
 The local gallery photos and brand mark are copied into `public/assets/` for this standalone app. Some images are used as illustrative work samples.
